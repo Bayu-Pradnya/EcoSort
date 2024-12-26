@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peta Lokasi Daur Ulang - Bali</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <header class="bg-green-500 text-white">
+        <div class="container mx-auto flex justify-between items-center py-4 px-6">
+            <h1 class="text-2xl font-bold">EcoSort</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="index.html" class="hover:underline">Beranda</a></li>
+                    <li><a href="community.html" class="hover:underline">Komunitas</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="bg-white">
+        <div class="container mx-auto px-6 py-12 text-center">
+            <h2 class="text-4xl font-bold text-green-600 mb-4">Peta Lokasi Daur Ulang di Bali</h2>
+            <p class="text-gray-700 mb-6">Temukan lokasi pusat daur ulang di Bali dengan mudah.</p>
+        </div>
+    </section>
+
+    <section class="py-12">
+        <div class="container mx-auto px-6">
+            <div id="map" class="w-full h-96 rounded shadow-md"></div>
+        </div>
+    </section>
+
+    <footer class="bg-green-500 text-white py-6">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 EcoSort. Semua Hak Dilindungi.</p>
+        </div>
+    </footer>
+
+    <script>
+
+        var map = L.map('map').setView([-8.65, 115.2167], 10);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var locations = [
+            { name: "Pusat Daur Ulang Kuta", coords: [-8.717, 115.168] },
+            { name: "Pusat Daur Ulang Denpasar", coords: [-8.65, 115.2167] },
+            { name: "Pusat Daur Ulang Ubud", coords: [-8.507, 115.262] },
+            { name: "Pusat Daur Ulang Nusa Dua", coords: [-8.798, 115.224] }
+        ];
+
+        locations.forEach(function(location) {
+            L.marker(location.coords).addTo(map)
+                .bindPopup(`<b>${location.name}</b>`);
+        });
+    </script>
+</body>
+</html>
